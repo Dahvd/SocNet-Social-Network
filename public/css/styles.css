@@ -56,6 +56,7 @@
     text-align: center;
   }
   .button {
+    background-color: gray;
     color: black;
     border: none;
     padding: 10px 32px;
@@ -63,4 +64,14 @@
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
+  }
+  .buttonsm {
+    background-color: White;
+    color: black;
+    border: none;
+    padding: 5px 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
   }

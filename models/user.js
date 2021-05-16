@@ -37,7 +37,8 @@ var userSchema = new Schema({
             type: String,
             required: true
         },
-        posts: [{ type: Schema.Types.ObjectId, ref: "Post" }]
+        posts: [{ type: Schema.Types.ObjectId, ref: "Post" }],
+        following: [{type:Schema.Types.ObjectId, ref: "User"}]
     },
 
     {

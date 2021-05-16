@@ -8,8 +8,8 @@ const postSchema = new Schema({
     description: {
         type: String,
         required: true
-    }
-    // users: { type: Schema.Types.ObjectId, ref: "User" }
+    },
+    user: { type: Schema.Types.ObjectId, ref: "User" }
  },
  {timestamp: true}
 );

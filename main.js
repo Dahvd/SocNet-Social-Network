@@ -16,7 +16,7 @@ User = require("./models/user"),
 Post = require("./models/post");
 
 mongoose = require("mongoose");
-mongoose.connect("mongodb://localhost:27017/soc_net", 
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost:27017/soc_net", 
     {useNewUrlParser: true});
 mongoose.set("useCreateIndex", true);
 
@@ -75,6 +75,11 @@ router.post("/signup", usersController.validate, usersController.create, usersCo
 router.get("/login", usersController.getLogIn);
 router.post("/login", usersController.authenticate);
 router.get("/logout", usersController.logout, usersController.redirectView);
+
+router.get("/users/follow/:id", usersController.follow, usersController.redirectView);
+router.get("/users/unfollow/:id", usersController.unfollow, usersController.redirectView);
+router.get("/users/follow1/:id", usersController.follow1, usersController.redirectView);
+router.get("/users/unfollow1/:id", usersController.unfollow1, usersController.redirectView);
 router.get("/users/l/posts", usersController.showLPosts, usersController.showLPostsL);
 router.get("/users/:id", usersController.show, usersController.showView);
 router.get("/users/:id/deletePost", usersController.deletePost, usersController.redirectView);

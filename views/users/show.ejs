@@ -46,3 +46,9 @@
             </tr>
     </tbody>
 </table>
+<% if(currentUser.following.includes(user._id)){ %>
+    <a  class="button" href="<%=` /users/unfollow/${user._id} `%>">Unfollow</a>
+<% }else { %>
+    <a  class="button" href="<%=` /users/follow/${user._id} `%>">Follow</a>
+<% } %>
+<!-- <a  class="button" href="<%= currentUser.following.includes(user._id) ? '/users/unfollow/user._id' : '/users/follow/${user._id}' %>"><%= currentUser.following.includes(user._id) ? "Unfollow" : "Follow" %></a> -->

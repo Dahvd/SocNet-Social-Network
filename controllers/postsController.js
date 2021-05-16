@@ -8,6 +8,7 @@ module.exports = {
         let newPost = new Post({
             poster: res.locals.currentUser.fullName,
             description: req.body.description,
+            user: res.locals.currentUser._id
 
         });
         Post.create(newPost)
@@ -18,8 +19,6 @@ module.exports = {
                 user => {
                     user.posts.push(post);
                     user.save();
-                    console.log("Made the post and associated with user maybe? Lets see");
-                    console.log(user);
                     res.locals.currentUser = user;
                 }
             )

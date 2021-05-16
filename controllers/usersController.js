@@ -68,6 +68,7 @@ module.exports = {
     },
     redirectView: (req, res, next) => {
         let redirectPath = res.locals.redirect;
+        console.log("redirecting to: ", redirectPath);
         if(redirectPath != undefined) res.redirect(redirectPath);
         else next();
     },
@@ -150,17 +151,14 @@ module.exports = {
     },
     showLPosts: (req, res, next) => {
         let temparr = [];
-        console.log("before searching for posts");
         Post.find().then(
             posts => {
-                console.log(posts);
                 for(let i = 0; i < posts.length; i++) {
                     if (posts[i].poster == res.locals.currentUser.fullName){
                         temparr.push(posts[i])
                     }
                 }
                 res.locals.currentUserPosts = temparr;
-                console.log(res.locals.currentUserPosts);
                 next();
             })
             .catch(error => {
@@ -176,9 +174,8 @@ module.exports = {
         let index = res.locals.currentUser.posts.indexOf(postId);
         if (index > -1) {
             res.locals.currentUser.posts.splice(index, 1);
-            User.findById
+            res.locals.currentUser.save();
         }
-        User.findByIdAndUpdate(res.locals.currentUser._id, res.locals.currentUser.posts);
         Post.findByIdAndRemove(postId)
         .then(() => {
             res.locals.redirect = "/home";
@@ -188,7 +185,97 @@ module.exports = {
             console.log(`Error fetching post by ID: ${error.message}`);
             next(error);
         });
-    }
+    },
+    follow: (req, res, next) => {
+        console.log("Follow");
+        let userId = req.params.id;
+        let cuser = res.locals.currentUser;
+        User.findById(userId)
+        .then(user => {
+            res.locals.user = user;
+            cuser.following.push(userId);
+            cuser.save();
+            res.locals.currentUser = cuser;
+            res.locals.redirect = `/users/${userId}`;
+            console.log("before next");
+            next();
+        })
+        .catch(error => {
+            console.log(`Error fetching user by ID: ${error.message}`);
+        })
+
+    },
+    unfollow: (req, res, next) => {
+        console.log("UnFollow");
+        let userId = req.params.id;
+        let cuser = res.locals.currentUser;
+        User.findById(userId)
+        .then(user => {
+            res.locals.user = user;
+            let index = cuser.following.indexOf(userId);
+            cuser.following.splice(index, 1);
+            cuser.save();
+            res.locals.currentUser = cuser;
+            res.locals.redirect = `/users/${userId}`;
+            console.log("before next");
+            next();
+        })
+        .catch(error => {
+            console.log(`Error fetching user by ID: ${error.message}`);
+        })
+
+    },
+    follow1: (req, res, next) => {
+        console.log("Follow");
+        let userId = req.params.id;
+        let cuser = res.locals.currentUser;
+        User.findById(userId)
+        .then(user => {
+            res.locals.user = user;
+            cuser.following.push(userId);
+            cuser.save();
+            res.locals.currentUser = cuser;
+            res.locals.redirect = `/home`;
+            console.log("before next");
+            next();
+        })
+        .catch(error => {
+            console.log(`Error fetching user by ID: ${error.message}`);
+        })
+
+    },
+    unfollow1: (req, res, next) => {
+        console.log("UnFollow");
+        let userId = req.params.id;
+        let cuser = res.locals.currentUser;
+        User.findById(userId)
+        .then(user => {
+            res.locals.user = user;
+            let index = cuser.following.indexOf(userId);
+            cuser.following.splice(index, 1);
+            cuser.save();
+            res.locals.currentUser = cuser;
+            res.locals.redirect = `/home`;
+            console.log("before next");
+            next();
+        })
+        .catch(error => {
+            console.log(`Error fetching user by ID: ${error.message}`);
+        })
+
+    },
+    // followView:(req, res) => {
+    //     User.findById(req.params.id)
+    //     .then(user => {
+    //         res.locals.user = user;
+    //         next();
+    //     })
+    //     .catch(error => {
+    //         console.log(`Error fetching user by ID: ${error.message}`);
+    //     })
+    //     console.log(res.locals);
+    //     res.render("users/show");   
+    //}
 
 
 }
