@@ -1,0 +1,58 @@
+
+
+<div class="container">
+    <div class="text-center mb-3 mt-5">
+        <h1>
+            <img src="images/SocNet.PNG" alt="" width="60" height="60">
+            <Span>Sign in to SocNet</Span>
+        </h1>
+    </div>
+
+    <form method="post" action="/login"> 
+        <div class="d-flex align-items-center justify-content-center">
+            <div class="form-group row col-xxl-3 col-xl-4 col-lg-5 col-md-5 col-sm-7 col-7">
+                <div class="mb-3">
+                    <input type="email" id="email" name="email" required class="form-control"
+                        placeholder="Email">
+                    <div id="emailInputError" class="invisible errorTxtColor"></div>
+                </div>
+                <div>
+                    <input type="password" id="password" name="password" required class="form-control"
+                        placeholder="Password">
+                    <div id="passwordInputError" class="invisible errorTxtColor"></div>
+                </div>
+
+                <div class="d-flex align-items-center justify-content-center mt-2">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="rememberMeCheckbox">
+                        <label class="form-check-label" for="rememberMeCheckbox">Remember me?</label>
+                    </div>
+                </div>
+
+                <p class="text-center">
+                    <button type="reset" class="btn btn-secondary mt-2">Cancel</button>
+                    <button type="submit" class="btn btn-primary mt-2">Sign in</button>
+                </p>
+            </div>
+        </div>
+    </form>
+
+
+
+    <div class="d-flex justify-content-center row m-0">
+        <div
+            class="d-flex justify-content-lg-end justify-content-md-end justify-content-center col-lg-5 col-md-3 col-sm-10">
+            <a href="forgotPassword">Forgot Password?</a>
+        </div>
+        <div
+            class="d-flex justify-content-lg-start justify-content-md-start justify-content-center col-lg-5 col-md-3 col-sm-10">
+            <a href="/signup">Sign up for SocNet</a>
+        </div>
+    </div>
+
+    
+    
+
+
+    
+</div>

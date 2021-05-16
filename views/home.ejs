@@ -1,0 +1,95 @@
+<div class="container">
+
+    <div class='bg-light'>
+
+        <!--Top Navigation-->
+        <%- include('partials/navbar') %>
+
+        <!-- Main Page Content-->
+        <div class="main container-fluid">
+
+            <div class='row'>
+
+                <div class='col-lg-3 col-sm-1' style="position:fixed">
+                    <br><br><br><br><br><br>
+                    <div class='d-flex justify-content-left'>
+                        <div class="card" style="width: 20rem;">
+
+                            <h4 class="card-title">
+                                &nbsp;Suggested Followers
+                            </h4>
+
+                            <div class="row card-body">
+
+                                <tbody>
+                                    <% users.forEach(user => { %>
+                                        <tr>
+                                            <td>
+                                                <a href="<%= `/users/${user._id} `%>">
+                                                    <%= user.fullName %>
+                                                </a>
+                                            </td>
+                                        </tr>       
+                                    <% }) %>
+
+                                </tbody>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--Fixed makes it so that the next column goes where it was so this is to place hold so the posts column can be scrollable-->
+                <div class='col-lg-3'>
+                </div>
+                <div class='col-lg-6'>
+                    <div class='posts d-flex justify-content-center'>
+                        <!-- <a  class='d-flex justify-content-center'href="/posts/new">Post</a> -->
+
+                        <div>
+                            <div class="card post" style="width: 30rem;">
+                                
+                                <div class="card-title centa">
+                                    New Post
+                                </div>
+
+                                <div class="card-body">
+                                    <div class="form-data ">
+                                        <form action="/posts/create" method="POST">
+                                            <textarea rows="5" cols ="60" type="description" name="description" id="txtDescription" placeholder="Create a new post!" required></textarea>
+                                            <button type="submit">Post</button>
+                                        </form>
+                                    </div>
+                                </div>
+                        </div>
+                        <% posts.forEach(post => { %>
+                        <div>
+                            <div class="card post" style="width: 30rem;">
+                                
+                                <div class="card-title">
+                                    <h5>
+                                        <span>&nbsp;</span>
+                                        <%= post.poster %>
+                                    </h5>
+                                </div>
+
+                                <div class="card-body">
+                                    <p class="card-text">
+                                        <span>&nbsp;</span>
+                                        <%= post.description %>
+                                    </p>
+                                    <div class='btn-group' role='group'>
+                                        <button type="button" class="btn btn-default">Like</button>
+                                        <button type="button" class="btn btn-default">Comment</button>
+                                        <button type="button" class="btn btn-default">More</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <% }) %>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

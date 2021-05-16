@@ -1,0 +1,56 @@
+<div class="header">
+    <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-success">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/home">
+                <img src="images/SocNet.PNG" alt="logo" width="30" height="30">
+            </a>
+
+            <div class='d-flex justify-content-between'>
+                <form class="d-flex justify-content-start">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                </form>
+            </div>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list"
+                    viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                        d="M2.5 11.5A.5.5 0 0 1 3 11h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 7h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 3h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z">
+                    </path>
+                </svg>
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+
+                <ul class="navbar-nav ml-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/home">Home</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/users/l/posts">Your Posts</a>
+                    </li>
+
+                    <li class="nav-item">
+                            <% if(loggedIn) { %>
+                                <a class="nav-link" href="<%=`/users/${currentUser._id}/l`%>">
+                                    <%= currentUser.fullName %>
+                                </a>
+                    </li>
+                    <li class="nav-item">
+                                <a class="nav-link" href="/logout">Log out</a>
+    
+                            <% } else { %>
+                            <a class="nav-link" href="/login">Log in</a>
+                            <% } %>
+                    </li>
+                </ul>
+
+            </div>
+        </div>
+    </nav>
+</div>

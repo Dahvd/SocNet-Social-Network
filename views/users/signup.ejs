@@ -1,0 +1,156 @@
+<div id="bsoverride">
+    <div class="text-center mb-3 mt-5">
+        <h1>
+            <img src="images/SocNet.PNG" alt="" width="60" height="60">
+            <Span>Create SocNet Account</Span>
+        </h1>
+    </div>
+
+    <form action="/signup" method="post" onsubmit="return validateForm()" novalidate>
+        <div class="d-flex align-items-center justify-content-center">
+            <div class="form-group row col-xxl-3 col-xl-4 col-lg-5 col-md-5 col-sm-7 col-7">
+                <div class="mb-3">
+                    <input type="text" id="firstNameTxt" name="firstNameTxt" required class="form-control"
+                        placeholder="First Name">
+                    <div id='firstNameTxtError' class="invisible errorTxtColor"></div>
+                </div>
+                <div class="mb-3">
+                    <input type="text" id="lastNameTxt" name="lastNameTxt" required class="form-control"
+                        placeholder="Last Name">
+                    <div id='lastNameTxtError' class="invisible errorTxtColor"></div>
+                </div>
+                <div class="mb-3">
+                    <input type="text" id="usernameTxt" name="usernameTxt" required class="form-control"
+                        placeholder="@ Username">
+                    <div id='usernameTxtError' class="invisible errorTxtColor"></div>
+                </div>
+                <div class="mb-3">
+                    <select name="ddGender" id="ddGender" class="form-control">
+                        <option value="" selected>Gender</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Other">Other</option>
+                        <option value="noDisclose">Choose not to disclose</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <input type="text" id="locationTxt" name="locationTxt" class="form-control" placeholder="Location">
+                    <div id='locationTxtError' class="invisible errorTxtColor"></div>
+                </div>
+                <div class="mb-3">
+                    <input type="email" id="email" name="email" required class="form-control"
+                        placeholder="Email">
+                    <div id='emailInputError' class="invisible errorTxtColor"></div>
+                </div>
+                <div class="mb-3">
+                    <input type="password" id="password" name="password" required class="form-control"
+                        placeholder="Password">
+                    <div id="passwordInputError" class="invisible errorTxtColor"></div>
+                </div>
+                <div class="mb-3">
+                    <input type="password" id="confirmPasswordInput" name="confirmPasswordInput" required
+                        class="form-control" placeholder="Confirm Password">
+                    <div id="confirmPasswordInputError" class="invisible errorTxtColor"></div>
+                </div>
+                <div id="secQs" class="mb-3">
+                    <select name="secQ" id="secQ" required class="form-control" onchange="updateSecurityQ()">
+                        <option value="" selected disabled>Security Questions</option>
+                        <option value="mmn">What is your mother's maiden name?</option>
+                        <option value="fp">What was the name of your first pet?</option>
+                        <option value="fc">What color was your first car?</option>
+                    </select>
+                    <div id="secQError" class="invisible errorTxtColor"></div>
+
+                </div>
+
+                <div class="mb-3">
+                    <input type="text" id="secQAnswer" name="secQAnswer" required class="form-control invisible"
+                        placeholder="Answer">
+                        <div id="secQAnswerError" class="invisible errorTxtColor"></div>
+
+                </div>
+
+
+                <div class="mb-3 mt-2 text-center">
+                    <button type="reset" class="btn btn-secondary mt-2">Cancel</button>
+                    <button type="submit" class="btn btn-primary mt-2">Sign up</button>
+                </div>
+            </div>
+        </div>
+    </form>
+    <script>
+        //fill out form data with user values if it exists
+        let dataForm = <%-JSON.stringify(formData)%>;
+        let userfields = <%-JSON.stringify(userFields)%>;
+        let errorinfo = <%-JSON.stringify(errorInfo)%>;
+        let optional = <%-JSON.stringify(optional)%>;
+        let secs = <%-JSON.stringify(sec)%>;
+
+    
+        if(dataForm != "temp"){
+            
+            let tempArr = [
+            document.getElementById("firstNameTxt"),
+            document.getElementById("lastNameTxt"),
+            document.getElementById("usernameTxt"),
+            document.getElementById("email"),
+            document.getElementById("password"),
+            document.getElementById("confirmPasswordInput")];
+            
+            let tempErrorArr = [
+            document.getElementById("firstNameTxtError"),
+            document.getElementById("lastNameTxtError"),
+            document.getElementById("usernameTxtError"),
+            document.getElementById("emailInputError"),
+            document.getElementById("passwordInputError"),
+            document.getElementById("confirmPasswordInputError")];
+
+            for(let i = 0; i < userfields.length; i++){//error loop for required fields
+                if(userfields[i] == ""){ //give error 
+                    tempArr[i].classList.add("hasError");
+                    tempErrorArr[i].classList.remove("invisible");
+                    tempErrorArr[i].innerHTML = errorinfo[i];
+                }
+                else{ //remove errors and repopulate the field
+                    tempArr[i].classList.remove("hasError");
+                    tempArr[i].value = userfields[i];
+
+                    tempErrorArr[i].classList.add("invisible");
+
+                }
+            }
+
+            //option fields
+            if(optional[0] != "Gender"){//gender
+                document.getElementById("ddGender").value = optional[0];
+            }
+            else{
+                document.getElementById("ddGender").value = "Gender";
+            }
+            if(optional[1] != "") {//location
+                document.getElementById("locationTxt").value = optional[1];
+            }
+
+            //security questions -diferent because dd i guess?
+            if(secs[0] == "" || secs[0] == null) {//add error
+                document.getElementById("secQ").classList.add("hasError");
+                document.getElementById("secQError").classList.remove("invisible");
+                document.getElementById("secQError").innerHTML = "You must answer a security question";
+
+            }
+            else{
+                document.getElementById("secQ").classList.remove("hasError");
+                document.getElementById("secQ").value = secs[0];
+                document.getElementById("secQError").classList.add("invisible");
+                document.getElementById("secQAnswer").classList.remove("invisible");
+                document.getElementById("secQAnswer").value = secs[1];
+
+
+            }
+
+        }
+    </script>
+
+
+        <script src="/js/signup.js"></script>
+</div>

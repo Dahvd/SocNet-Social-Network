@@ -1,0 +1,36 @@
+        <!--Top Navigation-->
+        <div>
+            <%- include('../partials/navbar') %>
+            <br>
+            <br>
+            <br>
+        </div>
+<div>
+    <% currentUserPosts.forEach(post => { %>
+        <div class="d-flex justify-content-center">
+        <div class="card post" style="width: 30rem;">
+
+            <div class="card-title">
+
+                <h5>
+                    <span>&nbsp;</span>
+                    <%= post.poster %>
+                </h5>
+            </div>
+            
+            <div class="card-body">
+                <p class="card-text">
+                    <span>&nbsp;</span>
+                    <%= post.description %>
+                </p>
+                <div class='btn-group' role='group'>
+                    <button type="button" class="btn btn-default">Like</button>
+                    <button type="button" class="btn btn-default">Comment</button>
+                    <a class="button" href="<%= `/users/${post._id}/deletePost` %>" onclick="return confirm('Are you sure?')">Delete</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <% }) %>
+</div>

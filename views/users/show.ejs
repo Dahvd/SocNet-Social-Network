@@ -1,0 +1,48 @@
+        <!--Top Navigation-->
+        <div>
+            <%- include('../partials/navbar') %>
+            <br>
+            <br>
+            <br>
+        </div>
+<h2 class="center">User Data for <%= user.fullName %></h2>
+<table class="table">
+    <tbody>
+            <tr>
+                <td>Name:</td>
+                <td>
+                    <%= user.fullName %>
+                </td>
+            </tr>
+            <tr>
+                <td>Username:</td>
+                <td>
+                    <%= user.username %>
+                </td>
+            </tr>
+            <tr>
+                <td>Number of posts:</td>
+                <td>
+                    <%= user.numPosts %>
+                </td>
+            </tr>
+            <tr>
+                <td>Email:</td>
+                <td>
+                    <%= user.email %>
+                </td>
+            </tr>
+            <tr>
+                <td>Location:</td>
+                <td>
+                    <%= user.location %>
+                </td>
+            </tr> 
+            <tr>
+                <td>Gender:</td>
+                <td>
+                    <%= user.gender %>
+                </td>
+            </tr>
+    </tbody>
+</table>
